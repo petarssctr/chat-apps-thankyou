@@ -1,0 +1,19 @@
+{
+  "name": "chat-apps-thankyou",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api/webhook.js",
+  "scripts": {
+    "start": "micro -l tcp://0.0.0.0:4444",
+    "deploy": "npx vercel --prod",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
+    "micro": "^9.3.4"
+  }
+}
