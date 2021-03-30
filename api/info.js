@@ -4,9 +4,9 @@ const axios = require("axios");
 
 module.exports = async (req, res) => {
   try {
-    send({
+    send(res, 200, {
       message: 'hello from chat app'
-    }, 200, {});
+    });
   } catch (error) {
     console.log({ error });
     send(res, 200, { ok: false });
