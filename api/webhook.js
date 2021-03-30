@@ -28,6 +28,7 @@ module.exports = async (req, res) => {
       await http.post("/messages", {
         channel: channelId,
         text: `thank you ${username}! <3`,
+        message,
       });
     }
     send(res, 200, {});
