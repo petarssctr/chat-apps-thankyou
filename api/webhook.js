@@ -17,13 +17,17 @@ module.exports = async (req, res) => {
 
     if (message.metadata.type === 'tip') {
       const username = message?.metadata?.author?.username ?? "";
-      const amount = message?.message?.context?.tip?.amount;
+      const amount = message?.metadata?.context?.tip?.amount;
+
+      const thanksMessage = amount > 1
+        ? amount > 2 ? `thank youuu ${username}! <3 (for ${amount} tks)` : `thank you soooo much ${username}! <3 (for ${amount} tks)`
+        : `tnx ${username}. (for ${amount} tks)`;
 
       console.log({username, amount});
       if (username) {
         await http.post("/messages", {
           channel: channelId,
-          text: `thank you ${username}! <3`,
+          text: thanksMessage,
           message,
           as: 'channel',
         });
