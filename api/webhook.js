@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
       }
     } else {
       const isOwner = message?.actor?.role === "owner";
-      const username = message?.actor?.username ?? "";
+      const username = message?.actor?.userMetadata?.username ?? "";
   
       if (!isOwner) {
         await http.post("/messages", {
