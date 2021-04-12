@@ -25,12 +25,14 @@ module.exports = async (req, res) => {
 
       if (username) {
         console.log('sending message', {username, amount});
-        await http.post("/messages", {
+        const r = await http.post("/messages", {
           channel: channelId,
           text: thanksMessage,
           message,
           as: 'channel',
         });
+
+        console.log({res: r});
       }
     } else {
       const isOwner = message?.actor?.role === "owner";
