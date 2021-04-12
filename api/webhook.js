@@ -14,17 +14,16 @@ module.exports = async (req, res) => {
     });
 
     const { message, channelId } = await json(req);
-    console.log({'message.metadata': message.metadata});
+    console.log({'message.metadata': message.metadata.context});
 
     if (message.metadata.type === 'tip') {
-      const isOwner = message?.actor?.role === "owner";
-      const username = message?.actor?.username ?? "";
-
-      if (!isOwner) {
+      const username = message?.metadata?.author?.username ?? "";
+      if (username) {
         await http.post("/messages", {
           channel: channelId,
           text: `thank you ${username}! <3`,
           message,
+          as: 'channel',
         });
       }
     } else {
@@ -36,6 +35,7 @@ module.exports = async (req, res) => {
           channel: channelId,
           text: `thank you ${username}! <3`,
           message,
+          as: 'channel',
         });
       }
     }
