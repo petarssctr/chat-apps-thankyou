@@ -41,7 +41,7 @@ module.exports = async (req, res) => {
       if (!isOwner) {
         await http.post("/messages", {
           channel: channelId,
-          text: `thank you ${username}! <3`,
+          text: `hey ${username}! <3`,
           message,
           as: 'channel',
         });
