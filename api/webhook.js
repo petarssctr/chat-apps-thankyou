@@ -14,6 +14,7 @@ module.exports = async (req, res) => {
     });
 
     const { message, channelId } = await json(req);
+    console.log({message});
 
     console.log(
       `[${message?.actor?.userMetadata?.displayName}]: ${message.message} [${
