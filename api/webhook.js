@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
 
     const { message, channelId } = await json(req);
 
-    if (message.metadata.type === 'tip') {
+    if (message?.metadata?.type === 'tip') {
       const username = message?.metadata?.author?.username ?? "";
       const amount = message?.metadata?.context?.tip?.amount;
 
@@ -23,8 +23,8 @@ module.exports = async (req, res) => {
         ? amount > 2 ? `thank youuu ${username}! <3 (for ${amount} tks)` : `thank you soooo much ${username}! <3 (for ${amount} tks)`
         : `tnx ${username}. (for ${amount} tks)`;
 
-      console.log({username, amount});
       if (username) {
+        console.log('sending message', {username, amount});
         await http.post("/messages", {
           channel: channelId,
           text: thanksMessage,
