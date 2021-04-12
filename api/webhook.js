@@ -14,24 +14,38 @@ module.exports = async (req, res) => {
     });
 
     const { message, channelId } = await json(req);
-    console.log({message});
+    console.log({'message.metadata': message.metadata});
+
+    if (message.metadata.type === 'tip') {
+      const isOwner = message?.actor?.role === "owner";
+      const username = message?.actor?.username ?? "";
+
+      if (!isOwner) {
+        await http.post("/messages", {
+          channel: channelId,
+          text: `thank you ${username}! <3`,
+          message,
+        });
+      }
+    } else {
+      const isOwner = message?.actor?.role === "owner";
+      const username = message?.actor?.username ?? "";
+  
+      if (!isOwner) {
+        await http.post("/messages", {
+          channel: channelId,
+          text: `thank you ${username}! <3`,
+          message,
+        });
+      }
+    }
 
     console.log(
-      `[${message?.actor?.userMetadata?.displayName}]: ${message.message} [${
+      `[${message?.actor?.username}]: ${message.message} [${
         message.timestamp
       }] (now: [${new Date().valueOf()}])`
     );
 
-    const isOwner = message?.actor?.role === "owner";
-    const username = message?.actor?.userMetadata?.displayName ?? "";
-
-    if (!isOwner) {
-      await http.post("/messages", {
-        channel: channelId,
-        text: `thank you ${username}! <3`,
-        message,
-      });
-    }
     send(res, 200, {});
   } catch (error) {
     console.log({ error: error.response?.data ?? error });
