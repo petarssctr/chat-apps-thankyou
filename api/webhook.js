@@ -14,10 +14,12 @@ module.exports = async (req, res) => {
     });
 
     const { message, channelId } = await json(req);
-    console.log({'message.metadata': message.metadata.context});
 
     if (message.metadata.type === 'tip') {
       const username = message?.metadata?.author?.username ?? "";
+      const amount = message?.message?.context?.tip?.amount;
+
+      console.log({username, amount});
       if (username) {
         await http.post("/messages", {
           channel: channelId,
