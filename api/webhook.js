@@ -28,7 +28,6 @@ module.exports = async (req, res) => {
         const r = await http.post("/messages", {
           channel: channelId,
           text: thanksMessage,
-          message,
           as: 'channel',
         });
 
@@ -41,8 +40,7 @@ module.exports = async (req, res) => {
       if (!isOwner) {
         await http.post("/messages", {
           channel: channelId,
-          text: `hey ${username}! <3`,
-          message,
+          text: `${message.message.replace('[k6]', '[app]')} [ts=${new Date().valueOf()}]`,
           as: 'channel',
         });
       }
