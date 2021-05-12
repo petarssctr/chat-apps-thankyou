@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
       if (!isOwner) {
         await http.post("/messages", {
           channel: channelId,
-          text: `${message.message.replace('[k6]', '[app]')} [ts=${new Date().valueOf()}]`,
+          text: `${message.message.replace('[k6]', `[${process.env.APP_NAME || 'app'}]`)} [ts=${new Date().valueOf()}]`,
           as: 'channel',
         });
       }
