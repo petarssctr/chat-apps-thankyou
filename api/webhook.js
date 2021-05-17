@@ -23,9 +23,8 @@ module.exports = async (req, res) => {
       //   ? amount > 2 ? `thank youuu ${username}! <3 (for ${amount} tks)` : `thank you soooo much ${username}! <3 (for ${amount} tks)`
       //   : `tnx ${username}. (for ${amount} tks)`;
 
-      const msg = message.metadata.context.tip.message;
-      console.log(JSON.stringify(msg));
-      const thanksMessage = `${msg.replace('[k6]', `[${process.env.APP_NAME || 'app'}]`)} ${message.message} [ts=${new Date().valueOf()}]`
+      const tipMsg = message.metadata.context.tip.message;
+      const thanksMessage = `${tipMsg.replace('[k6]', `[${process.env.APP_NAME || 'app'}]`)} ${message.message} [ts=${new Date().valueOf()}]`
 
       if (username) {
         console.log('sending message', {username, amount, thanksMessage});
